@@ -5,9 +5,9 @@ import {
     deleteStudent,
     updateStudent,
     addScore,
-    findStudentsByName,
-    countStudentsByName,
-    findStudentsByMinScore
+    findByName,
+    countByName,
+    findByMinScore
 } from "../controller/studentController.js";
 
 const router = Router();
@@ -17,8 +17,8 @@ router.get("/student/:id", findStudent);
 router.delete("/student/:id", deleteStudent);
 router.patch("/student/:id", updateStudent);
 router.patch("/score/student/:id", addScore);
-router.get("/students/name/:name", findStudentsByName);
-router.get("/quantity/students", countStudentsByName);
-router.get("/student/exam/:exam/minscore/:minScore", findStudentsByMinScore);
+router.get("/students/name/:name", findByName);
+router.get("/quantity/students", countByName);
+router.get("/student/exam/:exam/minscore/:minScore", findByMinScore);
 
 export default router;

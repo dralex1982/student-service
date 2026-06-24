@@ -1,4 +1,5 @@
 import * as service from "../service/studentService.js";
+import {findStudentsByMinScore} from "../service/studentService.js";
 
 export const addStudent = async (req, res) => {
     const success = await service.addStudent(req.body);
@@ -65,7 +66,7 @@ export const addScore = async (req, res) => {
     const {examName, score} = req.body ?? {};
     const success = await service.addScore(req.params.id, examName, score);
     if (success) {
-        return res.status(204).send(success);
+        return res.status(204).send();
     } else {
         return res.status(404).send(
             {
@@ -79,20 +80,19 @@ export const addScore = async (req, res) => {
     }
 }
 
-export const findStudentsByName = async (req, res) => {
-    const students = await service.findStudentsByName(req.query.name) ?? {};
+export const findByName = async (req, res) => {
+    const students = await service.findStudentsByName(req.query.name);
     return res.json(students);
 }
 
-export const countStudentsByName = async (req, res) => {
-
-    const countStudents = await service.countStudentsByName(req.params.names) ?? 0;
+export const countByName = async (req, res) => {
+    const countStudents = await service.countStudentsByName(req.params.names) ;
     return res.json(countStudents);
 }
 
-export const findStudentsByMinScore = async (req, res) => {
-    const {exam, minScore} = await service.deleteStudent(req.params);
-    const students = await findStudentsByMinScore(exam, minScore) ?? {}
+export const findByMinScore = async (req, res) => {
+    const {exam, minScore} = req.params;
+    const students = await service.findStudentsByMinScore(exam, minScore);
     return res.json(students);
 }
 
