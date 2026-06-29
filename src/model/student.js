@@ -10,7 +10,7 @@ const studentSchema = new Schema({
         of: Number,
         default: {}
     }
-})
+}, {versionKey: false});
 
 const Student = model("student", studentSchema, 'college');
 
