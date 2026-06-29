@@ -1,6 +1,11 @@
 import * as repo from '../repository/studentRepository.js'
+import {findStudentById} from "../repository/studentRepository.js";
 
-export const addStudent = async (student) => repo.createStudent(student)
+export const addStudent = async ({id, name, password}) => {
+    if (await findStudentById(id)) return false;
+    await repo.createStudent({_id: id, name, password});
+    return true;
+}
 
 export const findStudent = async (id) => renameId(await repo.findStudentById(+id));
 
